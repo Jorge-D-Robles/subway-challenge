@@ -1,0 +1,32 @@
+<div class="panel">
+  <h2>Subway Challenge</h2>
+
+  <div class="controls">
+    <button (click)="calculateRoute()" [disabled]="isCalculating()">
+      {{ isCalculating() ? 'Calculating...' : 'Calculate Route' }}
+    </button>
+
+    <button *ngIf="hasResult()" (click)="togglePlay()">
+      {{ playbackService.isPlaying() ? 'Pause' : 'Play' }}
+    </button>
+  </div>
+
+  <div class="status" *ngIf="statusMessage()">
+    {{ statusMessage() }}
+  </div>
+
+  <div class="stats" *ngIf="hasResult()">
+    <div class="stat-row">
+      <span>Time:</span>
+      <span>{{ playbackService.currentTime() * 1000 | date:'shortTime' }}</span>
+    </div>
+    <div class="stat-row">
+      <span>Visited:</span>
+      <span>{{ playbackService.visitedStations().size }} / 472</span>
+    </div>
+    <div class="stat-row">
+      <span>Action:</span>
+      <span>{{ playbackService.currentAction() }}</span>
+    </div>
+  </div>
+</div>
